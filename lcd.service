@@ -1,0 +1,16 @@
+[Unit]
+Description = Home LCD monitor for temperature and humidity
+# After = network.target 
+ 
+[Service]
+Type = simple
+ExecStart = python3 /home/pi/lcd_display.py 
+User = pi
+Group = pi
+Restart = on-failure 
+SyslogIdentifier = lcd
+RestartSec = 5
+TimeoutStartSec = infinity
+ 
+[Install]
+WantedBy = multi-user.target
