@@ -5,6 +5,7 @@ This is my home hobby project with Raspberry Pi (Zero 2W, and 4B (4GB/8GB)), I'm
 - LCD display module with reading data using adafruit-circuitpython-dht package. 
 - Linux service file to run the LCD module at Pi boot.
 - Sending data to InfluxDB Cloud instance.
+- Crontab jobs to stop the LCD display at night, then re-enable it in the morning.
 
 # Ansible (still learning)
 - Currently I'm building an ansible playbook to deploy the code and enable services to Pis.
