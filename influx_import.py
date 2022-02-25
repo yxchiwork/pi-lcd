@@ -4,11 +4,11 @@ from influxdb_client.client.write_api import SYNCHRONOUS
 import adafruit_dht
 import time
 from dotenv import load_dotenv
+import os
 
 load_dotenv()
 
-DHT_SENSOR = Adafruit_DHT.DHT11
-DHT_PIN = 24
+dhtDevice = adafruit_dht.DHT11(24)
 
 token = os.getenv('influx_token')
 org = os.getenv('influxdb_org')
@@ -18,15 +18,15 @@ influx_url=os.getenv('influx_url')
 while True:
 	with InfluxDBClient(url=influx_url, token=token, org=org) as client:
 #to update the adadruit read
-		humidity, temperature = Adafruit_DHT.read(DHT_SENSOR, DHT_PIN)
+		humidity, temperature = dhtDevice.humidity,dhtDevice.temperature
 		write_api = client.write_api(write_options=SYNCHRONOUS)
 		if humidity is not None and temperature is not None:
 			data1 = "humidity,room=Bedroom humidity={}".format(humidity)
 			data2 = "temperature,room=Bedroom temperature={}".format(temperature)
 			write_api.write(bucket, org, data1)
-			print("message 1 sent")
+			print(data1)
 			write_api.write(bucket, org, data2)
-			print("message 2 sent")
+			print(data2)
 		else:
 			time.sleep(1)
 			continue
