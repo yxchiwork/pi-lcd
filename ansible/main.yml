@@ -1,0 +1,70 @@
+---
+#### 1. Seperating tasks to be done later.
+#- include: lcd.yml
+#- include: influxdb.yml
+#- include: omv.yml
+
+- name: Configure LCD temperature monitor on Pi.
+  hosts: all
+  become: yes
+  remote_user: pi
+#### 2. Adding roles later
+# roles: 
+#   - pi-zero-2w
+#### 3. Using variables later
+#  vars:
+#  - package: 
+#  - service: lcd.service
+#### setting up environment variable later.
+  tasks:
+    - name: Install Packages
+      apt:
+        pkg:
+          - git
+          - python3-pip
+          - lsof
+          - libgpiod2
+
+    - name: Get code
+      ansible.builtin.git:
+        repo: https://github.com/yxchiwork/pi-lcd.git
+        dest: /home/pi/lcd
+        clone: yes
+        update: yes
+
+    - name: Install LCD required python package
+      pip:
+        name: 
+          - adafruit-circuitpython-dht
+          - influxdb-client
+          - rpi-lcd
+
+#### 4. To be fixed, install and enable services.
+    # - name: install LCD systemd unit file
+    #   template: src=/home/pi/lcd/lcd.service dest=/etc/systemd/system/lcd.service
+    
+    # - name: install InfluxDB processing systemd unit file
+    #   template: src=/home/pi/lcd/influx-import.service dest=/etc/systemd/system/influx-import.service
+
+    # - name: start LCD service
+    #   systemd: state=started name=lcd
+
+    # - name: start influx-import service
+    #   systemd: state=started name=influx-import
+#### 5. Setting up crontab jobs later.    
+#   - name: Setup Crontab job
+#    command: chmod +x /home/pi/lcd/add_crobtab.sh
+
+#    - name: Setup Crontab job
+#     command: sh /home/pi/lcd/add_crobtab.sh
+
+    # - name: Add job triggering logs rotation.
+    #   cron:
+    #     cron_file: '/etc/crontab'
+    #     user: 'pi'
+    #     name: 'lightoff'
+    #     minute: '5'
+    #     hour: '20'
+    #     job: 'python3 /home/pi/lcd/lcd_light_off.py'
+    #     state: present
+    #   tags: cronjob

@@ -4,7 +4,7 @@ Description = Home LCD monitor for temperature and humidity
  
 [Service]
 Type = simple
-ExecStart = python3 /home/pi/lcd_display.py 
+ExecStart = python3 /home/pi/lcd/lcd_display.py 
 User = pi
 Group = pi
 Restart = on-failure 
