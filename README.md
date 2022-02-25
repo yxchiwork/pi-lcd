@@ -6,6 +6,11 @@ This is my home hobby project with Raspberry Pi (Zero 2W, and 4B (4GB/8GB)), I'm
 - Linux service file to run the LCD module at Pi boot.
 - Sending data to InfluxDB Cloud instance.
 - Crontab jobs to stop the LCD display at night, then re-enable it in the morning.
+- influx_env_sample.sh file for /etc/profile.d/, this will set the permanent environment variable in the system. 
 
 # Ansible (still learning)
-- Currently I'm building an ansible playbook to deploy the code and enable services to Pis.
+- main file is completed, apt and pip packages will be installed, this repo will be also cloned.
+- pending 5 tasks to expend it to multi-file, functions.
+
+# Known issue
+- ada_fruit_dht package doesn't work on 2 processes at the same time. I will have to use the legacy package at the same time. 

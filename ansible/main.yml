@@ -36,10 +36,14 @@
       pip:
         name: 
           - adafruit-circuitpython-dht
-          - influxdb-client
+          - influxdb-client[ciso]
           - rpi-lcd
+          - python-dotenv
+          - autopep8
+          - Adafruit-DHT
 
 #### 4. To be fixed, install and enable services.
+## TODO: enable I2C/SPI interface
     # - name: install LCD systemd unit file
     #   template: src=/home/pi/lcd/lcd.service dest=/etc/systemd/system/lcd.service
     

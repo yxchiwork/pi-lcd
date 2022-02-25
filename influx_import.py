@@ -2,14 +2,15 @@ from influxdb_client import InfluxDBClient
 from influxdb_client.client.write_api import SYNCHRONOUS
 import adafruit_dht
 import time
-from dotenv import load_dotenv
 import os
+from dotenv import load_dotenv
+
 
 load_dotenv()
 
 dhtDevice = adafruit_dht.DHT11(24)
 
-token = os.getenv('influx_token')
+token = os.getenv('influxdb_token')
 org = os.getenv('influxdb_org')
 bucket = "Home-weather"
 influx_url=os.getenv('influx_url')
@@ -29,4 +30,4 @@ while True:
 		else:
 			time.sleep(1)
 			continue
-		time.sleep(1)
+		time.sleep(120)
